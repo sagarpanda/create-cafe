@@ -1,0 +1,40 @@
+{
+  "name": "create-cafe",
+  "version": "0.0.1",
+  "description": "",
+  "bin": {
+    "create-cafe": "./bin/create-cafe.js"
+  },
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "vite build --watch",
+    "build": "vite build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "scaffolding",
+    "bootstrap",
+    "template",
+    "app"
+  ],
+  "author": "Sagar Panda",
+  "license": "ISC",
+  "dependencies": {
+    "@clack/prompts": "^0.7.0",
+    "@xhmikosr/decompress": "^10.0.1",
+    "@xhmikosr/decompress-targz": "^8.0.1",
+    "chalk": "^5.3.0",
+    "extract-zip": "^2.0.1",
+    "figlet": "^1.7.0",
+    "joi": "^17.13.3",
+    "picocolors": "^1.0.1",
+    "rc": "^1.2.8",
+    "slugify": "^1.6.6",
+    "tar": "^7.4.3"
+  },
+  "devDependencies": {
+    "rollup-plugin-node-polyfills": "^0.2.1",
+    "vite": "^5.4.2"
+  }
+}
