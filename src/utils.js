@@ -133,17 +133,24 @@ export const copyToProjectDir = (unzipDir, projectDir) => {
   fs.rmSync(unzipDir, { recursive: true, force: true });
 };
 
-export const templateValueParse = (value) => {
+export const templateValueParse = (value, gitProvider) => {
   const domains = {
     github: 'https://github.com',
     gitlab: 'https://gitlab.com'
   };
+
   const splitValue = value.split(':');
   const splitValue2 = splitValue[1].split('#');
+
   const domain = domains[splitValue[0]] || `https://${splitValue[0]}`;
   const branch = splitValue2[1] || 'master';
   const relRepoUrl = splitValue2[0];
-  const url = `${domain}/${relRepoUrl}/archive/refs/heads/${branch}.tar.gz`;
+
+  let url = `${domain}/${relRepoUrl}/archive/refs/heads/${branch}.tar.gz`;
+  if (gitProvider === 'gitlab') {
+    const lastItem = relRepoUrl.split('/').pop();
+    url = `${domain}/${relRepoUrl}/-/archive/${branch}/${lastItem}-${branch}.tar.gz`;
+  }
 
   return {
     domain,

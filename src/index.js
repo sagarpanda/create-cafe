@@ -57,7 +57,7 @@ const main = async () => {
   const ans = await inquire(cfg);
   const projectDir = path.resolve(cwd, ans.name);
   const projectName = getProjectNameFromPath(projectDir);
-  const template = templateValueParse(ans.template);
+  const template = templateValueParse(ans.template, ans.gitProvider);
 
   const s = spinner();
   s.start('Downloading template...');
