@@ -17,6 +17,7 @@ const schema = Joi.object({
   h: Joi.bool(),
   help: Joi.bool(),
   v: Joi.bool(),
+  token: Joi.string(),
   version: Joi.bool(),
   configs: Joi.array().items(Joi.string()),
   config: Joi.string()
@@ -133,7 +134,7 @@ export const copyToProjectDir = (unzipDir, projectDir) => {
   fs.rmSync(unzipDir, { recursive: true, force: true });
 };
 
-export const templateValueParse = (value, gitProvider) => {
+export const templateValueParse = (value, gitProvider, token) => {
   const domains = {
     github: 'https://github.com',
     gitlab: 'https://gitlab.com'
@@ -148,8 +149,9 @@ export const templateValueParse = (value, gitProvider) => {
 
   let url = `${domain}/${relRepoUrl}/archive/refs/heads/${branch}.tar.gz`;
   if (gitProvider === 'gitlab') {
+    const queryString = token ? `?private_token=${token}` : '';
     const lastItem = relRepoUrl.split('/').pop();
-    url = `${domain}/${relRepoUrl}/-/archive/${branch}/${lastItem}-${branch}.tar.gz`;
+    url = `${domain}/${relRepoUrl}/-/archive/${branch}/${lastItem}-${branch}.tar.gz${queryString}`;
   }
 
   return {

@@ -36,7 +36,8 @@ const main = async () => {
     name: argv._[0],
     template: argv.t || argv.template,
     help: argv.h || argv.help,
-    version: argv.v || argv.version
+    version: argv.v || argv.version,
+    token: argv.token
   };
 
   if (cfg.help) {
@@ -57,7 +58,7 @@ const main = async () => {
   const ans = await inquire(cfg);
   const projectDir = path.resolve(cwd, ans.name);
   const projectName = getProjectNameFromPath(projectDir);
-  const template = templateValueParse(ans.template, ans.gitProvider);
+  const template = templateValueParse(ans.template, ans.gitProvider, cfg.token);
 
   const s = spinner();
   s.start('Downloading template...');
