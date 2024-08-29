@@ -30,12 +30,19 @@ const inquireName = async (defaultName) => {
   return name;
 };
 
-const inquireTemplate = async (templateValue) => {
+const inquireTemplate = async (templateValue, userTemplates) => {
   let value = templateValue;
   if (!templateValue) {
-    const templateOptions = Object.entries(getTemplates()).map(([key, val]) => {
+    let templateOptions = Object.entries(getTemplates()).map(([key, val]) => {
       return { label: toTitleCase(key), value: val };
     });
+    const userTemplateOptions = Object.entries(userTemplates).map(
+      ([key, val]) => {
+        return { label: toTitleCase(key), value: val };
+      }
+    );
+    templateOptions = templateOptions.concat(userTemplateOptions);
+
     value = check(
       await select({
         message: 'Select a project template',
@@ -77,7 +84,7 @@ const inquireGitProvider = async (templateValue) => {
 
 const inquire = async (cfg) => {
   const name = await inquireName(cfg.name);
-  const template = await inquireTemplate(cfg.template);
+  const template = await inquireTemplate(cfg.template, cfg.templates);
   const gitProvider = await inquireGitProvider(template);
 
   return {

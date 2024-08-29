@@ -35,6 +35,7 @@ const main = async () => {
   const cfg = {
     name: argv._[0],
     template: argv.t || argv.template,
+    templates: argv.templates || {},
     help: argv.h || argv.help,
     version: argv.v || argv.version,
     token: argv.token

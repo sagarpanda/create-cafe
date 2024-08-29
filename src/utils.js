@@ -14,6 +14,7 @@ const schema = Joi.object({
   _: Joi.array().items(Joi.string()).max(1),
   t: Joi.string(),
   template: Joi.string(),
+  templates: Joi.object().pattern(Joi.string(), Joi.string()),
   h: Joi.bool(),
   help: Joi.bool(),
   v: Joi.bool(),

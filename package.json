@@ -1,6 +1,6 @@
 {
   "name": "create-cafe",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "",
   "bin": {
     "create-cafe": "./bin/create-cafe.js"
